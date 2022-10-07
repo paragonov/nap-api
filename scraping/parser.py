@@ -22,7 +22,7 @@ def read_post(link: str):
 
 
 def search_posts() -> Dict:
-    '''Функия парсит сайт
+    '''Функция парсит сайт
     кол-во страниц поставить в первый цикл for'''
 
     data = dict()
@@ -47,7 +47,8 @@ def search_posts() -> Dict:
             data[number_post] = {
                 'time_post': time_post,
                 'title_post': title_post,
-                'description': text_post
+                'link': link,
+                'contents': text_post
             }
             # print(text_post.text)
             # for key in KEYWORDS:
