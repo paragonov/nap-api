@@ -21,13 +21,13 @@ def read_post(link: str):
 
 
 
-def search_posts() -> Dict:
+def search_posts(pages: int) -> Dict:
     '''Функция парсит сайт
-    кол-во страниц поставить в первый цикл for'''
+    кол-во страниц поставить в параметр'''
 
     data = dict()
 
-    for page in range(1, 20):
+    for page in range(1, pages+1):
         print(page)
 
         url = f'https://buh.ru/news/?PAGEN_1={page}'
@@ -50,15 +50,52 @@ def search_posts() -> Dict:
                 'link': link,
                 'contents': text_post
             }
-            # print(text_post.text)
-            # for key in KEYWORDS:
-            #     if key in post.text or key.title() in post.text:
-            #         print(f'{key.title()}\n{time_post.text} - {title_post.text} - {link}')
+
+    with open('data.json', 'w') as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)
 
     return data
 
+
+def check_new_posts() -> Dict:
+    '''Функция проверяет новые новости'''
+
+    fresh_news = dict()
+
+    with open('data.json') as file:
+        news_data = json.load(file)
+
+    url = f'https://buh.ru/news/'
+    response = req.get(url=url, headers=HEADERS)
+    response.raise_for_status()
+    soup = BeautifulSoup(response.text, 'lxml')
+    posts = soup.find_all(class_="article")
+    # return len(posts)
+    for art in posts:
+        number_post = art.get('id').split('_')[-1]
+        
+        if number_post in news_data:
+            continue
+        else:
+            link = 'https://buh.ru' + art.find("a").get('href')
+            post = read_post(link)
+            time_post = post.find(class_='grayd').text
+            title_post = post.find('h1').text.strip()
+            text_post = post.find(class_='tip-news').text.replace('\n', '')
+            fresh_news[number_post] = {
+                'time_post': time_post,
+                'title_post': title_post,
+                'link': link,
+                'contents': text_post
+            }
+
+    with open('data.json', 'a') as file:
+        json.dump(fresh_news, file, indent=4, ensure_ascii=False)
+
+    return fresh_news
+
+
 if __name__ == '__main__':
-    a = search_posts()
-    with open('data.json', 'w') as file:
-        json.dump(a, file, indent=4, ensure_ascii=False)
+    search_posts(300)
+    # check_new_posts()
     
