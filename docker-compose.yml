@@ -1,0 +1,14 @@
+volumes:
+  pg_news:
+
+services:
+  pg_db:
+    image: postgres
+    container_name: postgres
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - pg_news:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
