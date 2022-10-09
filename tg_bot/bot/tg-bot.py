@@ -11,8 +11,8 @@ dp = Dispatcher(bot)
 
 positions = []
 positions_dict = {
-    'Первая должность': 'bug',
-    'Вторая должность': 'gendir',
+    'Бухгалтер': 'bukhgalter',
+    'Ген. Директор': 'gendir',
 }
 
 
@@ -21,16 +21,16 @@ positions_dict = {
 async def get_news(message: types.Message):
     data = {}
     position = positions_dict[positions[0]]
-    # async with ClientSession() as session:
-    #     try:
-    #         if message.text == 'Показать 2-3 новости':
-    #             response = await session.get(f'http://localhost:8000/apiv1/show2-3/{position}/')
-    #         elif message.text == 'Показать все новости':
-    #             response = await session.get(f'http://localhost:8000/apiv1/all/{position}/')
-    #         data = await response.json()
-    #     except Exception as ex:
-    #         print(ex)
-    #         await message.answer(text='Произошла ошибка. \n' 'Попробуйте снова.')
+    async with ClientSession() as session:
+        try:
+            if message.text == 'Показать 2-3 новости':
+                response = await session.get(f'http://localhost:8000/apiv1/show2_3/{position}/')
+            elif message.text == 'Показать все новости':
+                response = await session.get(f'http://localhost:8000/apiv1/all/{position}/')
+            data = await response.json()
+        except Exception as ex:
+            print(ex)
+        await message.answer(text='Произошла ошибка. \n' 'Попробуйте снова.')
     data = {
         1: {
             'title': 'Заголовок',
