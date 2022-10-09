@@ -11,7 +11,7 @@ class PositionsAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 
-admin.site.register(NewsAdmin)
-admin.site.register(PositionsAdmin)
+admin.site.register(News, NewsAdmin)
+admin.site.register(Positions, PositionsAdmin)
 admin.site.register(Insites)
 admin.site.register(Trends)
