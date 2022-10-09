@@ -30,7 +30,7 @@ async def get_news(message: types.Message):
             data = await response.json()
         except Exception as ex:
             print(ex)
-        await message.answer(text='Произошла ошибка. \n' 'Попробуйте снова.')
+            await message.answer(text='Произошла ошибка. \n' 'Попробуйте снова.')
     # data = {
     #     1: {
     #         'title': 'Заголовок',
@@ -42,9 +42,9 @@ async def get_news(message: types.Message):
     #     }
     # }
     if data:
-        for item in data.values():
+        for item in data:
             news_message = f'{hlink(item.get("title"), item.get("link"))}\n' \
-                           f'Краткое описание: {hbold(item.get("desc"))}\n' \
+                           f'Краткое описание: {hbold(item.get("description"))}\n' \
                            f'Дата: {hbold(item.get("date"))}\n' \
                            f'Тренды: {hbold(item.get("trends"))}\n' \
                            f'Инсайты: {hbold(item.get("insites"))}'
