@@ -34,8 +34,8 @@ async def get_news(message: types.Message):
     data = {
         1: {
             'title': 'Заголовок',
-            'desc': 'Краткое описание',
-            'link': 'Ссылка',
+            'description': 'Краткое описание',
+            'url': 'Ссылка',
             'date': 'Дата',
             'trends': 'Тренды',
             'insites': 'Инсайты'
