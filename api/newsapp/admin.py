@@ -3,7 +3,7 @@ from .models import News, Positions, Insites, Trends
 
 
 class NewsAdmin(admin.ModelAdmin):
-    fields = ('title', 'date', 'positions')
+    list_display = ('title', 'url', 'date')
 
 
 class PositionsAdmin(admin.ModelAdmin):
