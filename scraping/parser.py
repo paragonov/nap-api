@@ -28,8 +28,6 @@ def search_posts(pages: int) -> Dict:
     data = dict()
 
     for page in range(1, pages+1):
-        print(page)
-
         url = f'https://buh.ru/news/?PAGEN_1={page}'
         response = req.get(url=url, headers=HEADERS)
         sleep(1)
@@ -96,6 +94,7 @@ def check_new_posts() -> Dict:
 
 
 if __name__ == '__main__':
+
     search_posts(300)
     # check_new_posts()
     
