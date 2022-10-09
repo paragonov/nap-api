@@ -8,13 +8,20 @@
 `docker-compose up -d --build`
 
 ### Запуск Telegram-bot
+Перейдите в рабочую директорию бота
+
+`cd /tg_bot`
 
 Установите зависимости
 
 `pip install -r requirements.txt`
 
-Перейдите в рабочую директорию бота и запустите файл
+Перейдите в дерикторию с ботом
 
+`cd /bot`
+
+ и запустите файл
+ 
 `python tg-bot.py`
 
 Зайдите в приложение Telegram и найдите бота @test_news_hack_bot
