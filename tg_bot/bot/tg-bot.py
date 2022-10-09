@@ -31,16 +31,16 @@ async def get_news(message: types.Message):
         except Exception as ex:
             print(ex)
         await message.answer(text='Произошла ошибка. \n' 'Попробуйте снова.')
-    data = {
-        1: {
-            'title': 'Заголовок',
-            'description': 'Краткое описание',
-            'url': 'Ссылка',
-            'date': 'Дата',
-            'trends': 'Тренды',
-            'insites': 'Инсайты'
-        }
-    }
+    # data = {
+    #     1: {
+    #         'title': 'Заголовок',
+    #         'description': 'Краткое описание',
+    #         'url': 'Ссылка',
+    #         'date': 'Дата',
+    #         'trends': 'Тренды',
+    #         'insites': 'Инсайты'
+    #     }
+    # }
     if data:
         for item in data.values():
             news_message = f'{hlink(item.get("title"), item.get("link"))}\n' \
@@ -55,7 +55,7 @@ async def get_news(message: types.Message):
 @dp.message_handler(commands=['start'])
 @dp.message_handler(Text(equals='Сменить должность'))
 async def start_bot(message: types.Message):
-    start_buttons = ['Первая должность', 'Вторая должность']
+    start_buttons = ['Бухгалтер', 'Ген. Директор']
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(*start_buttons)
     await message.answer(text='Выберите вашу должность', reply_markup=keyboard)
