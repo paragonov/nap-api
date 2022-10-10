@@ -7,7 +7,7 @@
  
  `git clone https://github.com/paragonov/nap-api.git`
  
-Создайте образы Docker
+Создайте и запустите образы Docker
 
 `docker-compose up -d --build`
 
@@ -20,7 +20,7 @@
 
 `pip install -r requirements.txt`
 
-Перейдите в дерикторию с ботом
+Перейдите в дерикторию с файлом бота
 
 `cd /bot`
 
