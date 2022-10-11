@@ -27,5 +27,15 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=test_db
 
+  bot:
+    build: tg_bot/
+    working_dir: /tg_bot
+    command: >
+      sh -c "python3 ./bot/tg-bot.py"
+    depends_on:
+      - web
+    expose:
+      - 8000
+    network_mode: host
 volumes:
   postgres_data:
